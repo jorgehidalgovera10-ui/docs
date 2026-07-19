@@ -1,4 +1,76 @@
----
+--// Full Brainrot Panel + Auto Joiner - Para Sirius
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local stealEnabled = false
+local cloneEnabled = false
+local farmEnabled = false
+local espEnabled = false
+local joinerEnabled = false
+
+-- GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "FullStealerPanel"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 320, 0, 480)
+frame.Position = UDim2.new(0.5, -160, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 60)
+title.BackgroundTransparency = 1
+title.Text = "🧠 FULL BRAINROT PANEL"
+title.TextColor3 = Color3.fromRGB(0, 255, 200)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+local yPos = 70
+local function addToggle(name, defaultText, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.9, 0, 0, 50)
+    btn.Position = UDim2.new(0.05, 0, 0, yPos)
+    btn.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+    btn.Text = defaultText
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.TextScaled = true
+    btn.Font = Enum.Font.GothamSemibold
+    btn.Parent = frame
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+    
+    btn.MouseButton1Click:Connect(function()
+        callback(btn)
+    end)
+    
+    yPos = yPos + 60
+    return btn
+end
+
+-- Auto Steal
+addToggle("Auto Steal", "🔓 Auto Steal: OFF", function(btn)
+    stealEnabled = not stealEnabled
+    btn.Text = "🔓 Auto Steal: " .. (stealEnabled and "ON ✅" or "OFF")
+    btn.BackgroundColor3 = stealEnabled and Color3.fromRGB(0, 180, 0) or Color3.fromRGB(30, 30, 35)
+end)
+
+-- Auto Cloner
+addToggle("Auto Cloner", "♻️ Auto Cloner: OFF", function(btn)
+    cloneEnabled = not cloneEnabled
+    btn.Text = "♻️ Auto Cloner: " .. (cloneEnabled and "ON ✅" or "OFF")
+    btn.BackgroundColor3 = cloneEnabled and Color3.fromRGB(0, 180, 0) or Color3.fromRGB(30, 30, 35)
+end)
+
+-- Auto Farm
+addToggle("Auto Farm", "🌾 Auto Farm: OFF", function(btn)
+    farmEnabled = not farmEnabled
+    btn.Text = "🌾 Auto Farm: " .. (farmEnabled and
 title: Windows
 description: How to create and manage windows, tabs, and sections in Rayfield.
 ---
